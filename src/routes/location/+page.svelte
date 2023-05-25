@@ -1,19 +1,28 @@
 <script>
+  import { page } from "$app/stores";
+  import { onMount } from "svelte";
 
-    import { page } from '$app/stores';
-    
-    const location_id = $page.url.searchParams.get('id');
-    console.log(location_id);
+  const BASE_URL = "https://rickandmortyapi.com/api/";
+  const location_id = $page.url.searchParams.get("id");
+  console.log(location_id);
 
-    let name;
-    let type;
-    let dimension;
-    let residents = 0;
+  let location = { name: "", type: "", dimension: "", residents: 0 };
 
+  onMount(async () => {
+    //Fetch the data for the location with the given ID
+    fetch(`${BASE_URL}/location/${location_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        location.name = data.name;
+        location.type = data.type;
+        location.dimension = data.dimension;
+        location.residents = data.residents;
+      });
+  });
 </script>
 
 <div>
-    <h1>{ name }</h1>
-    <h3>{ type } | { dimension }</h3>
-    <h5>{ residents } residents</h5>
+  <h1>{location.name}</h1>
+  <h3>{location.type} | {location.dimension}</h3>
+  <h5>{location.residents.length} residents</h5>
 </div>
