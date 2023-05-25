@@ -25,7 +25,7 @@
   <div class="info">
     <h1>{name}</h1>
     <h3 class="status">
-      <div class="{status} statusCircle" />
+      <div class="{status.toLowerCase()} statusCircle" />
       {status} - {species}
     </h3>
     <h3 class="locationLabel">Last known location</h3>
@@ -63,11 +63,11 @@
     margin-right: 10px;
   }
 
-  .Dead {
+  .dead {
     background: firebrick;
   }
 
-  .Alive {
+  .alive {
     background: green;
   }
 
